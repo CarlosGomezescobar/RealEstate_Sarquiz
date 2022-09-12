@@ -2,9 +2,7 @@ from .base import *
 
 
 
-DEFAULT_FROM_EMAIL = "info@urano_realestate.com"
-DOMAIN = env("DOMAIN")
-SITE_NAME = "Urano Real Estate"
+
 
 
 

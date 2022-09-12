@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -o errexit
+
+set -o nounset
+
+watchmedo auto-restart -d Urano/ -p "*.py" -- celery worker -A Urano --loglevel=info

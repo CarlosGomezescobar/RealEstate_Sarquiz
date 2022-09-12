@@ -8,6 +8,7 @@ ING Carlos Gomez...
 
 import environ
 import os
+from datetime import timedelta
 from pathlib import Path
 env = environ.Env(
     DEBUG=(bool, False))
@@ -33,13 +34,13 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(" ")
 # Application definition
 
 DJANGO_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
+    "django.contrib.contenttypes",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 SITE_ID = 1
 
@@ -50,8 +51,8 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "djoser",
     "rest_framework_simplejwt",
-    #"djcelery_email",
-    #"import_export",
+    "djcelery_email",
+    "import_export",
 
 ]
 
@@ -147,12 +148,15 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# EMAiL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = env("EMAIL_HOST")
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = env("EMAIL_PORT")
-# EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_USE_TLS = True
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = "admin@urano_realestate.com"
+DOMAIN = env("DOMAIN")
+SITE_NAME = "Urano Real Estate"
 
 AUTH_USER_MODEL = "users.User"
 REST_FRAMEWORK = {
@@ -160,7 +164,6 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
-from datetime import timedelta
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': (
@@ -239,6 +242,6 @@ logging.config.dictConfig(
 
     }
 )
-# CELERY_BROKER_URL = env("CELERY_BROKER")
-# CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
-# CELERY_TIMEZONE = "Venezuela/Barinas"
+CELERY_BROKER_URL = env("CELERY_BROKER")
+CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
+CELERY_TIMEZONE = "Venezuela/Barinas"

@@ -20,13 +20,13 @@ services:
         networks:
             - estate-react
 
-    client:
+    frontend:
         build:
-            context: ./client
+            context: ./frontend
             dockerfile: ./docker/local/Dockerfile
         restart: on-failure
         volumes:
-            - ./client:/app
+            - ./frontend:/app
             - /app/node_modules
         networks:
             - estate-react
